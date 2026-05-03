@@ -3,6 +3,14 @@ const axios = require('axios');
 
 const router = express.Router();
 
+// Basic service health (no external provider dependency).
+router.get('/', (_req, res) => {
+  return res.json({
+    ok: true,
+    status: 'ok'
+  });
+});
+
 const mapProviderError = (status) => {
   if (status === 401 || status === 403) return 'auth_failed';
   if (status === 402) return 'quota_exceeded';

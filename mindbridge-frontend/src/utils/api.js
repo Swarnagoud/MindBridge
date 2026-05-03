@@ -1,4 +1,17 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const rawBase = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// Accept both `https://...` and `https://.../api` in env without breaking existing setups.
+const API_BASE = rawBase.replace(/\/+$/, '').endsWith('/api')
+  ? rawBase.replace(/\/+$/, '')
+  : `${rawBase.replace(/\/+$/, '')}/api`;
+
+const safeJson = async (res) => {
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    const text = await res.text().catch(() => '');
+    throw new Error(text || `Non-JSON response (HTTP ${res.status})`);
+  }
+  return res.json();
+};
 
 const api = {
   login: async (email, password) => {
@@ -7,7 +20,7 @@ const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
-    return res.json();
+    return safeJson(res);
   },
   register: async (email, password) => {
     const res = await fetch(`${API_BASE}/auth/register`, {
@@ -15,7 +28,7 @@ const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
-    return res.json();
+    return safeJson(res);
   },
   chat: async (message, token, language = 'en') => {
     const res = await fetch(`${API_BASE}/chat`, {
@@ -26,7 +39,7 @@ const api = {
       },
       body: JSON.stringify({ message, language })
     });
-    return res.json();
+    return safeJson(res);
   },
   addMood: async (mood, note, token) => {
     const res = await fetch(`${API_BASE}/mood`, {
@@ -37,25 +50,25 @@ const api = {
       },
       body: JSON.stringify({ mood, note })
     });
-    return res.json();
+    return safeJson(res);
   },
   getMoods: async (token) => {
     const res = await fetch(`${API_BASE}/mood`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    return res.json();
+    return safeJson(res);
   },
   getRecommendations: async (token) => {
     const res = await fetch(`${API_BASE}/recommend`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    return res.json();
+    return safeJson(res);
   },
   getCounselors: async (token) => {
     const res = await fetch(`${API_BASE}/counselors`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    return res.json();
+    return safeJson(res);
   },
   createBooking: async (data, token) => {
     const res = await fetch(`${API_BASE}/bookings`, {
@@ -63,20 +76,20 @@ const api = {
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify(data)
     });
-    return res.json();
+    return safeJson(res);
   },
   getBookings: async (token) => {
     const res = await fetch(`${API_BASE}/bookings`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    return res.json();
+    return safeJson(res);
   },
   cancelBooking: async (id, token) => {
     const res = await fetch(`${API_BASE}/bookings/${id}/cancel`, {
       method: 'PATCH',
       headers: { 'Authorization': `Bearer ${token}` }
     });
-    return res.json();
+    return safeJson(res);
   }
 };
 
