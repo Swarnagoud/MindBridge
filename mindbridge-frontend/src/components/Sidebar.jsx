@@ -1,4 +1,4 @@
-import { Home, MessageCircle, BarChart3, Lightbulb, BookOpen, Phone, LogOut, Heart } from 'lucide-react';
+import { Home, MessageCircle, BarChart3, Lightbulb, BookOpen, Phone, LogOut, Heart, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -10,6 +10,7 @@ const Sidebar = ({ onLogout }) => {
     { to: '/dashboard', icon: Home, label: t('nav.dashboard') },
     { to: '/chat', icon: MessageCircle, label: t('nav.chat') },
     { to: '/mood', icon: BarChart3, label: t('nav.mood') },
+    { to: '/journal', icon: FileText, label: t('nav.journal', 'Journal') },
     { to: '/recommendations', icon: Lightbulb, label: t('nav.recommendations') },
     { to: '/resources', icon: BookOpen, label: t('nav.resources') },
     { to: '/tele-counseling', icon: Phone, label: t('nav.teleCounseling') },
@@ -31,7 +32,7 @@ const Sidebar = ({ onLogout }) => {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-2 space-y-1">
+      <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto no-scrollbar">
         {navItems.map(({ to, icon: Icon, label }) => {
           const active = location.pathname === to;
           return (

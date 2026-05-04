@@ -58,6 +58,7 @@ app.use('/api/mood', require('./routes/mood'));
 app.use('/api/recommend', require('./routes/recommend'));
 app.use('/api/counselors', require('./routes/counselors'));
 app.use('/api/bookings', require('./routes/bookings'));
+app.use('/api/journal', require('./routes/journal'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

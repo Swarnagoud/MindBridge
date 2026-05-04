@@ -72,14 +72,14 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-8rem)] max-w-3xl mx-auto pb-24 md:pb-0">
+    <div className="flex flex-col h-[calc(100dvh-8rem)] max-w-3xl mx-auto pb-28 md:pb-0">
       {/* Header */}
-      <div className="card mb-3 flex items-center gap-3 py-3">
+      <div className="card mb-3 flex items-center gap-3 py-4">
         <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center">
           <Heart className="w-4 h-4 text-white" />
         </div>
         <div>
-            <p className="font-semibold text-gray-700 text-sm">{t('chat.title')}</p>
+          <p className="font-semibold text-gray-700 text-sm">{t('chat.title')}</p>
           <p className="text-xs text-green-500 flex items-center gap-1">
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block animate-pulse-soft" />
             {t('chat.status')}

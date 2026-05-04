@@ -90,6 +90,51 @@ const api = {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     return safeJson(res);
+  },
+  unlockJournal: async (password, token) => {
+    const res = await fetch(`${API_BASE}/journal/unlock`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ password })
+    });
+    return safeJson(res);
+  },
+  getJournals: async (token, journalToken) => {
+    const res = await fetch(`${API_BASE}/journal`, {
+      headers: { 'Authorization': `Bearer ${token}`, 'X-Journal-Token': journalToken }
+    });
+    return safeJson(res);
+  },
+  createJournal: async (data, token, journalToken) => {
+    const res = await fetch(`${API_BASE}/journal`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'X-Journal-Token': journalToken
+      },
+      body: JSON.stringify(data)
+    });
+    return safeJson(res);
+  },
+  updateJournal: async (id, data, token, journalToken) => {
+    const res = await fetch(`${API_BASE}/journal/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'X-Journal-Token': journalToken
+      },
+      body: JSON.stringify(data)
+    });
+    return safeJson(res);
+  },
+  deleteJournal: async (id, token, journalToken) => {
+    const res = await fetch(`${API_BASE}/journal/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}`, 'X-Journal-Token': journalToken }
+    });
+    return safeJson(res);
   }
 };
 

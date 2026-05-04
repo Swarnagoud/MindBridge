@@ -9,6 +9,7 @@ import MoodPage from './pages/MoodPage';
 import RecommendationsPage from './pages/RecommendationsPage';
 import ResourcesPage from './pages/ResourcesPage';
 import TeleCounselingPage from './pages/TeleCounselingPage';
+import JournalPage from './pages/JournalPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -44,7 +45,7 @@ function App() {
     <Router>
       <div className="min-h-screen">
         <Sidebar onLogout={handleLogout} />
-        <div className="md:ml-64 pb-20 md:pb-0">
+        <div className="md:ml-64 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-0">
           <div className="flex justify-end px-4 md:px-6 pt-4 md:pt-5 max-w-5xl mx-auto">
             <LanguageSwitcher compact />
           </div>
@@ -57,6 +58,7 @@ function App() {
               <Route path="/recommendations" element={<RecommendationsPage />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/tele-counseling" element={<TeleCounselingPage />} />
+              <Route path="/journal" element={<JournalPage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>
