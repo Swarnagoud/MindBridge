@@ -72,7 +72,6 @@ const Chat = () => {
   };
 
   return (
-    {/* `pb-24` keeps the fixed mobile BottomNav from covering the input box. */}
     <div className="flex flex-col h-[calc(100dvh-8rem)] max-w-3xl mx-auto pb-24 md:pb-0">
       {/* Header */}
       <div className="card mb-3 flex items-center gap-3 py-3">
