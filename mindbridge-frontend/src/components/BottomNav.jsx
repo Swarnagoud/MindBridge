@@ -1,8 +1,8 @@
-import { Home, MessageCircle, BarChart3, Lightbulb, BookOpen, Phone } from 'lucide-react';
+import { Home, MessageCircle, BarChart3, Lightbulb, BookOpen, Phone, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
-const BottomNav = () => {
+const BottomNav = ({ onLogout }) => {
   const location = useLocation();
   const { t } = useLanguage();
   const navItems = [
@@ -34,6 +34,19 @@ const BottomNav = () => {
             </Link>
           );
         })}
+
+        <button
+          type="button"
+          onClick={onLogout}
+          className="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all duration-200 text-gray-400 hover:text-red-500"
+          aria-label={t('nav.signOut')}
+          title={t('nav.signOut')}
+        >
+          <div className="p-1.5 rounded-xl transition-all duration-200 hover:bg-red-50">
+            <LogOut className="w-5 h-5" />
+          </div>
+          <span className="text-[10px] font-medium">{t('nav.signOut')}</span>
+        </button>
       </div>
     </div>
   );

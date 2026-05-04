@@ -61,7 +61,7 @@ function App() {
             </Routes>
           </main>
         </div>
-        <BottomNav />
+        <BottomNav onLogout={handleLogout} />
       </div>
     </Router>
   );

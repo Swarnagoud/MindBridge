@@ -72,7 +72,8 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] max-w-3xl mx-auto">
+    {/* `pb-24` keeps the fixed mobile BottomNav from covering the input box. */}
+    <div className="flex flex-col h-[calc(100dvh-8rem)] max-w-3xl mx-auto pb-24 md:pb-0">
       {/* Header */}
       <div className="card mb-3 flex items-center gap-3 py-3">
         <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center">
@@ -88,7 +89,7 @@ const Chat = () => {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-3 px-1 pb-2">
+      <div className="flex-1 min-h-0 overflow-y-auto space-y-3 px-1 pb-2">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in">
             <div className="text-5xl mb-4">🌿</div>
