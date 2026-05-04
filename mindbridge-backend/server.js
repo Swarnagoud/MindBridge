@@ -4,10 +4,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const allowedOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '')
+const normalizeOrigin = (value) => String(value || '').trim().replace(/\/+$/, '');
+const rawOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '')
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
+const allowAllOrigins = rawOrigins.includes('*');
+const allowedOrigins = rawOrigins.filter((o) => o !== '*').map(normalizeOrigin);
 
 // Avoid `Access-Control-Allow-Origin: *` with `credentials: true` (browsers block it).
 app.use(
@@ -15,8 +18,10 @@ app.use(
     origin: (origin, cb) => {
       // Allow non-browser clients (curl/postman) and same-origin server-to-server calls.
       if (!origin) return cb(null, true);
+      if (allowAllOrigins) return cb(null, true);
       if (allowedOrigins.length === 0) return cb(null, true);
-      if (allowedOrigins.includes(origin)) return cb(null, true);
+      const normalized = normalizeOrigin(origin);
+      if (allowedOrigins.includes(normalized)) return cb(null, true);
       return cb(new Error(`CORS blocked for origin: ${origin}`));
     },
     credentials: true
