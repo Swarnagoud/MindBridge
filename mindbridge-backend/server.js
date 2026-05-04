@@ -33,6 +33,16 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
+// Helpful deployment diagnostics (no secrets).
+console.log('Env check:', {
+  hasMongo: Boolean(process.env.MONGODB_URI),
+  hasJwt: Boolean(process.env.JWT_SECRET),
+  hasFrontendUrl: Boolean(process.env.FRONTEND_URL || process.env.FRONTEND_URLS),
+  hasOpenAIKey: Boolean(process.env.OPENAI_API_KEY),
+  hasOpenRouterKey: Boolean(process.env.OPENROUTER_API_KEY),
+  hasGrokKey: Boolean(process.env.GROK_API_KEY)
+});
+
 app.get('/', (_req, res) => {
   res.json({
     ok: true,
