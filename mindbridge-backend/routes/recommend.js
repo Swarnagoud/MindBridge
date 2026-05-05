@@ -32,20 +32,20 @@ router.get('/', auth, async (req, res) => {
 
     if (mood === 'sad' || sentiments.includes('sadness') || sentiments.includes('sad')) {
       recommendations = [
-        { title: 'Breathing Exercise', description: 'Try the 4-7-8 breathing technique.', link: 'https://www.youtube.com/watch?v=9-_b2nHHfRE' },
+        { title: 'Breathing Exercise', description: 'Try the 4-7-8 breathing technique.', link: 'https://www.youtube.com/results?search_query=4-7-8+breathing+exercise' },
         { title: 'Gratitude Journal', description: 'Write down 3 things you\'re grateful for.' },
         { title: 'Nature Walk', description: 'Spend 10 minutes in nature.' }
       ];
     } else if (mood === 'stress' || sentiments.includes('stress') || sentiments.includes('stressed')) {
       recommendations = [
-        { title: 'Progressive Muscle Relaxation', description: 'Tense and relax each muscle group.', link: 'https://www.youtube.com/watch?v=86HUcX8TWZs' },
+        { title: 'Progressive Muscle Relaxation', description: 'Tense and relax each muscle group.', link: 'https://www.youtube.com/results?search_query=progressive+muscle+relaxation+guided' },
         { title: 'Mindful Meditation', description: '5-minute guided meditation.' },
         { title: 'Healthy Snack', description: 'Eat something nutritious.' }
       ];
     } else if (mood === 'anxiety' || sentiments.includes('anxiety') || sentiments.includes('anxious')) {
       recommendations = [
         { title: 'Grounding Technique', description: 'Name 5 things you can see, 4 you can touch, etc.' },
-        { title: 'Calming Music', description: 'Listen to soothing music.', link: 'https://www.youtube.com/watch?v=2OEL4P1Rz04' },
+        { title: 'Calming Music', description: 'Listen to soothing music.', link: 'https://www.youtube.com/results?search_query=calming+music+for+anxiety' },
         { title: 'Talk to a Friend', description: 'Share your feelings with someone you trust.' }
       ];
     } else {
