@@ -1,4 +1,4 @@
-import { Home, MessageCircle, BarChart3, Lightbulb, BookOpen, Phone, LogOut } from 'lucide-react';
+import { Home, MessageCircle, BarChart3, FileText, Lightbulb, BookOpen, Phone, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -9,6 +9,7 @@ const BottomNav = ({ onLogout }) => {
     { to: '/dashboard', icon: Home, label: t('nav.home') },
     { to: '/chat', icon: MessageCircle, label: t('nav.chat') },
     { to: '/mood', icon: BarChart3, label: t('nav.mood') },
+    { to: '/journal', icon: FileText, label: t('nav.journal', 'Journal') },
     { to: '/recommendations', icon: Lightbulb, label: t('nav.tips') },
     { to: '/resources', icon: BookOpen, label: t('nav.resources') },
     { to: '/tele-counseling', icon: Phone, label: t('nav.help') },
